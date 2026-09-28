@@ -145,12 +145,17 @@ print(f"Random Forest prediction: {forest_prediction:+.2f}")
 
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 methods = results["Method"]
 test_r2 = results["Test R2"]
 
-plt.figure(figsize=(7, 5))
-plt.bar(methods, test_r2)
+plt.figure(figsize=(5, 5))
+plt.scatter(x=y_train, y=linear_train_pred, c='#7CAE00', alpha=0.3)
+
+z = np.polyfit(y_train, linear_train_pred, 1)
+p = np.poly1d(z)
+plt.plot(y_train, p(y_train), '#F8766D')
 
 plt.ylabel("Test R²")
 plt.title("Brazilian Championship: Model Comparison")
